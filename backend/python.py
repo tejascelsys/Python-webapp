@@ -2,7 +2,6 @@
 # import pandas as pd
 # from flask import request
 
-
 # # Example:
 # # As the Python webapp backend is a Flask app, refer to the Flask
 # # documentation for more information about how to adapt this
