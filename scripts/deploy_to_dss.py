@@ -4,11 +4,11 @@ import time, os
 from pathlib import Path
 
 # ---------------- CONFIG ----------------
-DSS_URL = os.environ.get("DSS_URL")
+DSS_URL: ${{ secrets.DSS_URL }}
 if not DSS_URL:
     raise RuntimeError("DSS_URL is not set in environment")
 
-API_KEY = os.environ.get("DSS_API_KEY")
+DSS_API_KEY: ${{ secrets.DSS_API_KEY }}
 if not API_KEY:
     raise RuntimeError("DSS_API_KEY is not set in environment")
 
