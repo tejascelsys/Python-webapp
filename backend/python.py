@@ -12,7 +12,7 @@
 
 # @app.route('/first_api_call')
 # def first_call():
-#     max_rows = request.args.get('max_rows') if 'max_rows' in request.args else 500
+#     max_rows = request.args.get('max_rows') if 'max_rows' in request.args else 500 
 
 #     mydataset = dataiku.Dataset("REPLACE_WITH_YOUR_DATASET_NAME")
 #     mydataset_df = mydataset.get_dataframe(sampling='head', limit=max_rows)
