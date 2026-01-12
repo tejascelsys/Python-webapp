@@ -4,7 +4,7 @@ import time, os
 from pathlib import Path
 
 # ---------------- CONFIG ----------------
-DSS_URL = ["https://design-node.labs.csi-infra.com"]
+DSS_URL = ["https://design-node.labs.csi-infra.com/dip/publicapi"]
 if not DSS_URL:
     raise RuntimeError("DSS_URL is not set in environment")
    # 🔴 MUST come from env
