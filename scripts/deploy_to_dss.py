@@ -4,11 +4,14 @@ import time, os
 from pathlib import Path
 
 # ---------------- CONFIG ----------------
-DSS_URL = ["https://design-node.labs.csi-infra.com/dip/publicapi"]
+DSS_URL = os.environ.get("DSS_URL")
 if not DSS_URL:
     raise RuntimeError("DSS_URL is not set in environment")
-   # 🔴 MUST come from env
-API_KEY = os.environ["DSS_API_KEY"]  # from GitHub secret
+
+API_KEY = os.environ.get("DSS_API_KEY")
+if not API_KEY:
+    raise RuntimeError("DSS_API_KEY is not set in environment")
+
 PROJECT_KEY = "ADMIN_CLEANUP_PROJECT"
 WEBAPP_ID = "X1kdb8M"
 BACKEND_FILE = Path("backend/python.py")
@@ -21,6 +24,7 @@ backend_code = BACKEND_FILE.read_text()
 timestamp = int(time.time())
 backend_code = f"# Update ID: {timestamp}\n\n{backend_code}"
 
+# Connect to Dataiku
 client = dataikuapi.DSSClient(DSS_URL, API_KEY)
 project = client.get_project(PROJECT_KEY)
 webapp = project.get_webapp(WEBAPP_ID)
@@ -39,3 +43,4 @@ future = webapp.start_or_restart_backend()
 future.wait_for_result()
 
 print("🚀 WebApp backend restarted successfully")
+
