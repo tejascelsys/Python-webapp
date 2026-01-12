@@ -27,5 +27,5 @@ from flask import request
 
 @app.route("/status")
 def status():
-    return "Backend updated successfully from GitHub!"
+    return "Frontend updated successfully from GitHub!"
 
