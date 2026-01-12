@@ -4,7 +4,10 @@ import time, os
 from pathlib import Path
 
 # ---------------- CONFIG ----------------
-DSS_URL = os.environ["DSS_URL"]   # 🔴 MUST come from env
+DSS_URL = os.getenv("DSS_URL")
+if not DSS_URL:
+    raise RuntimeError("DSS_URL is not set in environment")
+   # 🔴 MUST come from env
 API_KEY = os.environ["DSS_API_KEY"]  # from GitHub secret
 PROJECT_KEY = "ADMIN_CLEANUP_PROJECT"
 WEBAPP_ID = "X1kdb8M"
