@@ -1,0 +1,22 @@
+name: Deploy WebApp to Dataiku DSS
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Upload WebApp Backend
+        run: |
+          curl -X PUT \
+            "${{ secrets.DSS_URL }}/public/api/projects/ADMIN_CLEANUP_PROJECT/webapps/X1kdb8M_pythonwebapp2/backend" \
+            -H "Authorization: Bearer ${{ secrets.DSS_API_KEY }}" \
+            -H "Content-Type: text/plain" \
+            --data-binary @backend/python.py
