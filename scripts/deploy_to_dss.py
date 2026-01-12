@@ -5,12 +5,10 @@ from pathlib import Path
 
 # ---------------- CONFIG ----------------
 DSS_URL: "https://design-node.labs.csi-infra.com"
-if not DSS_URL:
-    raise RuntimeError("DSS_URL is not set in environment")
+
 
 API_KEY = os.environ["DSS_API_KEY"]
-if not API_KEY:
-    raise RuntimeError("DSS_API_KEY is not set in environment")
+
 
 PROJECT_KEY = "ADMIN_CLEANUP_PROJECT"
 WEBAPP_ID = "X1kdb8M"
