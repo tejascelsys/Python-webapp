@@ -1,4 +1,4 @@
-name: Deploy WebApp to Dataiku DSS
+name: Deploy Dataiku WebApp Backend
 
 on:
   push:
@@ -10,13 +10,21 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Upload WebApp Backend
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+
+      - name: Install dependencies
         run: |
-          curl -X PUT \
-            "${{ secrets.DSS_URL }}/dip/publicapi/projects/ADMIN_CLEANUP_PROJECT/webapps/X1kdb8M_pythonwebapp2/python" \
-            -H "Authorization: Bearer ${{ secrets.DSS_API_KEY }}" \
-            -H "Content-Type: text/plain" \
-            --data-binary @backend/python.py
+          pip install dataiku-api-client
+
+      - name: Deploy WebApp backend to Dataiku DSS
+        env:
+          DSS_API_KEY: ${{ secrets.DSS_API_KEY }}
+        run: |
+          python scripts/deploy_to_dss.py
+
