@@ -4,22 +4,22 @@ on:
   push:
     branches: [ main ]
     paths:
-      - 'backend/python.py' # Only run when this file changes
+      - 'backend/python.py'
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: [actions/checkout](github.com)@v3
+        uses: actions/checkout@v3
 
       - name: Set up Python
-        uses: [actions/setup-python](github.com)@v4
+        uses: actions/setup-python@v4
         with:
           python-version: '3.8'
 
       - name: Install Dataiku API
-        run: pip install [dataiku-api-client](pypi.org)
+        run: pip install dataiku-api-client
 
       - name: Sync to Dataiku
         env:
