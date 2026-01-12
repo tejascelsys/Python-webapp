@@ -16,7 +16,7 @@ jobs:
       - name: Upload WebApp Backend
         run: |
           curl -X PUT \
-            "${{ secrets.DSS_URL }}/dip/publicapi/projects/ADMIN_CLEANUP_PROJECT/webapps/X1kdb8M_pythonwebapp2/backend" \
+            "${{ secrets.DSS_URL }}/dip/publicapi/projects/ADMIN_CLEANUP_PROJECT/webapps/X1kdb8M_pythonwebapp2/python" \
             -H "Authorization: Bearer ${{ secrets.DSS_API_KEY }}" \
             -H "Content-Type: text/plain" \
             --data-binary @backend/python.py
