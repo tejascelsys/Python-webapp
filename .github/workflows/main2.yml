@@ -24,6 +24,7 @@ jobs:
 
       - name: Deploy WebApp backend to Dataiku DSS
         env:
+          DSS_URL: ${{ secrets.DSS_URL }}
           DSS_API_KEY: ${{ secrets.DSS_API_KEY }}
         run: |
           python scripts/deploy_to_dss.py
