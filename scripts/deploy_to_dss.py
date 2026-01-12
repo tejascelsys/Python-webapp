@@ -8,7 +8,7 @@ DSS_URL: "https://design-node.labs.csi-infra.com"
 if not DSS_URL:
     raise RuntimeError("DSS_URL is not set in environment")
 
-DSS_API_KEY: ${{ secrets.DSS_API_KEY }}
+API_KEY = os.environ["DSS_API_KEY"]
 if not API_KEY:
     raise RuntimeError("DSS_API_KEY is not set in environment")
 
