@@ -28,3 +28,4 @@ from flask import request
 def status():
     return "Backend updated successfully from GitHub again!!!"
 
+print("Hi")
