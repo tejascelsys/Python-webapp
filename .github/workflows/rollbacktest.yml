@@ -1,0 +1,42 @@
+name: Rollback LOS Frontend
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_name:
+        description: "Release to rollback to (e.g. release_20260113_045515)"
+        required: true
+        type: string
+
+# on:
+#   workflow_dispatch:
+#   push:
+#     branches: [LFD-93]
+
+
+jobs:
+  rollback:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Rollback on VM
+        run: |
+          az vm run-command invoke \
+            --command-id RunShellScript \
+            --name prod-web-server \
+            --resource-group cpz-webservers \
+            --scripts "
+              if [ ! -d /var/www/los-frontend/releases/${{ inputs.release_name }} ]; then
+                echo 'Release not found'
+                exit 1
+              fi
+              ln -sfn /var/www/los-frontend/releases/${{ inputs.release_name }} /var/www/los-frontend/current
+              systemctl reload nginx
+              echo 'Rollback completed'
+      #       "
+# refresh Tue Jan 13 01:34:38 PM IST 2026
